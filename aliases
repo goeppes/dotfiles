@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 alias cls="tput reset"
 alias winej="LANG='ja_JP.UTF8' wine"
 
