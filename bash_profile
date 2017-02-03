@@ -8,10 +8,6 @@
 # for ssh logins, install and configure the libpam-umask package.
 #umask 022
 
-if [ -d "$HOME/.cargo/bin" ]; then
-	PATH="$PATH:$HOME/.cargo/bin"
-fi
-
 # if running bash
 if [ -n "$BASH_VERSION" ]; then
     # include .bashrc if it exists
@@ -20,12 +16,27 @@ if [ -n "$BASH_VERSION" ]; then
     fi
 fi
 
+for file in ~/.{aliases,exports}; do
+    [ -r "$file" ] && [ -f "$file" ] && source "$file"
+done
+unset file
+
+# append to the history file, don't overwrite it
+shopt -s histappend
+
+# check the window size after each command and, if necessary,
+# update the values of LINES and COLUMNS.
+shopt -s checkwinsize
+
 # set PATH so it includes user's private bin if it exists
 if [ -d "$HOME/bin" ] ; then
     PATH="$HOME/bin:$PATH"
 fi
 
-export CHROME_REMOTE_DESKTOP_DEFAULT_DESKTOP_SIZES="1920x1080"
+# add rust programs to path
+if [ -d "$HOME/.cargo/bin" ]; then
+	PATH="$PATH:$HOME/.cargo/bin"
+fi
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="/home/tyro/.sdkman"
