@@ -16,29 +16,3 @@ if [ -n "$BASH_VERSION" ]; then
     fi
 fi
 
-for file in ~/.{aliases,exports}; do
-    [ -r "$file" ] && [ -f "$file" ] && source "$file"
-done
-unset file
-
-# append to the history file, don't overwrite it
-shopt -s histappend
-
-# check the window size after each command and, if necessary,
-# update the values of LINES and COLUMNS.
-shopt -s checkwinsize
-
-# set PATH so it includes user's private bin if it exists
-if [ -d "$HOME/bin" ] ; then
-    PATH="$HOME/bin:$PATH"
-fi
-
-# add rust programs to path
-if [ -d "$HOME/.cargo/bin" ]; then
-	PATH="$PATH:$HOME/.cargo/bin"
-fi
-
-#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-export SDKMAN_DIR="/home/tyro/.sdkman"
-[[ -s "/home/tyro/.sdkman/bin/sdkman-init.sh" ]] && source "/home/tyro/.sdkman/bin/sdkman-init.sh"
-
