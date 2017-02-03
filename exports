@@ -6,7 +6,7 @@ export HISTFILESIZE=2000
 
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
-HISTCONTROL=ignoreboth
+export HISTCONTROL=ignoreboth
 
 # fixes screen size when using chrome remote desktop on chromebook.
 export CHROME_REMOTE_DESKTOP_DEFAULT_DESKTOP_SIZES="1920x1080"
