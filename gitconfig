@@ -3,4 +3,15 @@
 	email = tyrothalos@gmail.com
 [core]
 	autocrlf = input
-	editor = vim
+  editor = vim
+[color]
+  diff = auto
+  status = auto
+  branch = auto
+  interactive = auto
+  ui = auto
+[gc]
+  auto = 1
+[merge]
+  summary = true
+
