@@ -63,11 +63,13 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'airblade/vim-gitgutter'
 Plug 'altercation/vim-colors-solarized'
+Plug 'editorconfig/editorconfig-vim'
 Plug 'fatih/vim-go'
-Plug 'nathanaelkane/vim-indent-guides'
+"Plug 'nathanaelkane/vim-indent-guides'
+Plug 'rust-lang/rust.vim'
 Plug 'scrooloose/syntastic'
 Plug 'tpope/vim-fugitive'
-Plug 'valloric/youcompleteme'
+"Plug 'valloric/youcompleteme'
 
 call plug#end()
 " }}}
