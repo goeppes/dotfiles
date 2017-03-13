@@ -1,83 +1,116 @@
-" vim:fdm=marker
-
-" local directories {{{
-set backupdir=~/.vim/backups
-set directory=~/.vim/swaps
-set undodir=~/.vim/undo
-" }}}
-
-" settings {{{
-set autoindent " copy indent from previous line
-set expandtab " tab inserts spaces instead of tabs
-set foldenable " enable folding
-set foldnestmax=1 " folds only go 1 level deep
-set nu "enable line numbers
-set shiftwidth=2 " reindent ops indent 2 columns
-set softtabstop=2 " tab key results in 2 spaces
-set tabstop=2 " tabs are displayed 2 spaces wide
-set undofile " persistent undo
-" }}}
-
-" git commit line wrapping
-autocmd Filetype gitcommit setlocal spell textwidth=72
-
-autocmd FileType c   setlocal noet sw=4 sts=4 ts=4
-autocmd FileType cpp setlocal noet sw=4 sts=4 ts=4
-
-" vim-indent-guides.vim {{{
-augroup vim_indent_guides_config
-  autocmd!
-  let g:indent_guides_enable_on_vim_startup = 1
-" let g:indent_guides_guide_size = 1
-  let g:indent_guides_auto_colors = 0
-" autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=darkgrey
-  autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=black
-augroup END
-" }}}
-
-" syntastic.vim {{{
-augroup syntastic_config
-  autocmd!
-  set statusline+=%#warningmsg#
-  set statusline+=%{SyntasticStatuslineFlag()}
-  set statusline+=%*
-
-  let g:syntastic_always_populate_loc_list = 1
-  let g:syntastic_auto_loc_list = 1
-  let g:syntastic_check_on_open = 1
-  let g:syntastic_check_on_wq = 0
-augroup END
-" }}}
-
-" youcompleteme.vim {{{
-augroup ycm_config
-  autocmd!
-  let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
-  let g:ycm_python_binary_path = 'python'
-  let g:ycm_rust_src_path = '~/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src'
-augroup END
-" }}}
-
+" vim: set foldmethod=marker foldlevel=0:
+" ============================================================================
 " vim-plug plugins {{{
+" ============================================================================
+
 call plug#begin('~/.vim/plugged')
+
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
 
 Plug 'airblade/vim-gitgutter'
 Plug 'altercation/vim-colors-solarized'
 Plug 'editorconfig/editorconfig-vim'
-Plug 'fatih/vim-go'
-"Plug 'nathanaelkane/vim-indent-guides'
+Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
 Plug 'rust-lang/rust.vim'
 Plug 'scrooloose/syntastic'
 Plug 'tpope/vim-fugitive'
-"Plug 'valloric/youcompleteme'
+
+function! BuildYCM(info)
+  if a:info.status == 'installed' || a:info.force
+    !./install.py --clang-completer --gocode-completer
+  endif
+endfunction
+Plug 'valloric/youcompleteme', { 'for': ['c', 'cpp', 'go'], 'do': function('BuildYCM') }
 
 call plug#end()
-" }}}
 
-" syntax highlighting {{{
+" }}}
+" ============================================================================
+" basic settings {{{
+" ============================================================================
+
+set nocompatible       " has to be explicit to work for some reason
+set hidden             " hides buffers instead of closing
+set number             " enable line numbers
+set undofile           " persistent undo
+set cursorline         " highlight current line
+set backspace=indent,eol,start
+set foldlevelstart=10  " open most folds by default
+set tabstop=2          " tabs are displayed 2 spaces wide
+set shiftwidth=2       " reindent ops indent 2 columns
+set softtabstop=2      " tab key results in 2 spaces
+set expandtab          " tab inserts spaces instead of tabs
+set autoindent         " copy indent from previous line
+set wildmenu           " visual autocomplete for command menu
+set lazyredraw         " redraw only when we need to
+set showmatch          " highlight matching parenthesis
+set hlsearch           " highlight search terms
+set incsearch          " show search matchs as you type
+
+" local directories
+set backupdir=~/.vim/backups
+set directory=~/.vim/swaps
+set undodir=~/.vim/undo
+
+"colorscheme
 set t_Co=256
 set background=dark
-syntax enable
 colorscheme solarized
-" }}}
 
+" }}}
+" ============================================================================
+" mappings {{{
+" ============================================================================
+
+let mapleader      = ","
+let maplocalleader = "\\"
+
+nnoremap H ^
+nnoremap L $
+nnoremap ; :
+nnoremap : ;
+
+inoremap jk <esc>
+vnoremap jk <esc>  
+
+" easier transitioning between windows
+noremap <c-h> <c-w>h
+noremap <c-j> <c-w>j
+noremap <c-k> <c-w>k
+noremap <c-l> <c-w>l
+
+" edit vimrc quickly
+nnoremap <leader>ev :vsplit $MYVIMRC<cr>
+nnoremap <leader>sv :source $MYVIMRC<cr>
+nnoremap <silent> <leader>n :nohlsearch<cr>
+
+" disable keys to help learn faster
+noremap <up> <nop>
+noremap <down> <nop>
+noremap <left> <nop>
+noremap <right> <nop>
+
+inoremap <up> <nop>
+inoremap <down> <nop>
+inoremap <left> <nop>
+inoremap <right> <nop>
+
+" ----------------------------------------------------------------------------
+" #!! | shebang
+" ----------------------------------------------------------------------------
+inoreabbrev <expr> #!! "#!/usr/bin/env" . (empty(&filetype) ? '' : ' '.&filetype)
+
+" }}}
+" ============================================================================
+" plugins {{{
+" ============================================================================
+
+" ----------------------------------------------------------------------------
+" syntastic.vim
+" ----------------------------------------------------------------------------
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+
+" }}}
+" ============================================================================

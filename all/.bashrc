@@ -2,6 +2,16 @@
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
 
+# set PATH so it includes user's private bin if it exists
+if [ -d "$HOME/bin" ] ; then
+  PATH="$HOME/bin:$PATH"
+fi
+
+# add rust programs to path
+if [ -d "$HOME/.cargo/bin" ]; then
+  PATH="$PATH:$HOME/.cargo/bin"
+fi
+
 # If not running interactively, don't do anything
 [[ -z "$PS1" ]] && return
 
@@ -169,6 +179,8 @@ alias winej="LANG='ja_JP.UTF8' wine"
 ################################################################################
 
 [[ -s "/home/tyro/.gvm/scripts/gvm" ]] && source "/home/tyro/.gvm/scripts/gvm"
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="/home/tyro/.sdkman"

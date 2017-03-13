@@ -16,16 +16,6 @@ export CHROME_REMOTE_DESKTOP_DEFAULT_DESKTOP_SIZES="1920x1080"
 #
 ################################################################################
 
-# set PATH so it includes user's private bin if it exists
-if [ -d "$HOME/bin" ] ; then
-  PATH="$HOME/bin:$PATH"
-fi
-
-# add rust programs to path
-if [ -d "$HOME/.cargo/bin" ]; then
-  PATH="$PATH:$HOME/.cargo/bin"
-fi
-
 # include .bashrc if it exists
 if [ -f "$HOME/.bashrc" ]; then
   . "$HOME/.bashrc"
