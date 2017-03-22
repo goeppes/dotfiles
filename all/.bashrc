@@ -2,32 +2,36 @@
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
 
-# set PATH so it includes user's private bin if it exists
-if [ -d "$HOME/bin" ] ; then
-  PATH="$HOME/bin:$PATH"
-fi
-
-# add rust programs to path
-if [ -d "$HOME/.cargo/bin" ]; then
-  PATH="$PATH:$HOME/.cargo/bin"
-fi
-
 # If not running interactively, don't do anything
 [[ -z "$PS1" ]] && return
+
+# automatically start tmux if we can
+#if command -v tmux>/dev/null; then
+#  [[ ! $TERM =~ screen ]] && [ -z $TMUX ] && exec tmux new-session -A -s main
+#fi
 
 # make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
-# for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
-export HISTSIZE=1000
-export HISTFILESIZE=2000
+# append to the history file, don't overwrite it
+shopt -s histappend
+
+# update LINES and COLUMNS on window resize
+shopt -s checkwinsize
 
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
 export HISTCONTROL=ignoreboth
+# for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
+export HISTSIZE=1000
+export HISTFILESIZE=2000
 
-shopt -s histappend   # append to the history file, don't overwrite it
-shopt -s checkwinsize # update LINES and COLUMNS on window resize
+export EDITOR="vim"
+export LANG="en_US.UTF-8"
+
+PATH="/usr/local/go/bin:$PATH"
+PATH="$HOME/bin:$PATH"
+PATH="$HOME/.cargo/bin:$PATH"
 
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
@@ -39,6 +43,28 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
+
+################################################################################
+#
+#  ALIASES
+#
+################################################################################
+
+# enable color support of ls and also add handy aliases
+if [ -x /usr/bin/dircolors ]; then
+  test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+  alias ls='ls --color=auto'
+  alias grep='grep --color=auto'
+fi
+
+# some more ls aliases
+alias ll='ls -alF --group-directories-first'
+alias la='ls -A'
+alias l='ls -CF'
+
+alias cls="tput reset"
+alias winej="LANG='ja_JP.UTF8' wine"
+alias ssudo='sudo -E env "PATH=$PATH"'
 
 ################################################################################
 #
@@ -144,45 +170,14 @@ export PS2
 
 ################################################################################
 #
-#  ALIASES
-#
-################################################################################
-
-# enable color support of ls and also add handy aliases
-if [ -x /usr/bin/dircolors ]; then
-  test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-  alias ls='ls --color=auto'
-  #alias dir='dir --color=auto'
-  #alias vdir='vdir --color=auto'
-
-  alias grep='grep --color=auto'
-  alias fgrep='fgrep --color=auto'
-  alias egrep='egrep --color=auto'
-fi
-
-# some more ls aliases
-alias ll='ls -alF --group-directories-first'
-alias la='ls -A'
-alias l='ls -CF'
-
-# Add an "alert" alias for long running commands.  Use like so:
-#   sleep 10; alert
-alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
-
-alias cls="tput reset"
-alias winej="LANG='ja_JP.UTF8' wine"
-
-################################################################################
-#
 #  MISCELLANEOUS
 #
 ################################################################################
 
-[[ -s "/home/tyro/.gvm/scripts/gvm" ]] && source "/home/tyro/.gvm/scripts/gvm"
-
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
+[[ -s "/home/tyro/.gvm/scripts/gvm" ]] && source "/home/tyro/.gvm/scripts/gvm"
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="/home/tyro/.sdkman"
 [[ -s "/home/tyro/.sdkman/bin/sdkman-init.sh" ]] && source "/home/tyro/.sdkman/bin/sdkman-init.sh"
-

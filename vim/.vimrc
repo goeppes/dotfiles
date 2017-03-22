@@ -5,14 +5,21 @@
 
 call plug#begin('~/.vim/plugged')
 
+" junegunn's plugins
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 
+" languages
+Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
+Plug 'guns/vim-clojure-static', { 'for': 'clojure' }
+Plug 'rust-lang/rust.vim'
+Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
+
+" editor
 Plug 'airblade/vim-gitgutter'
 Plug 'altercation/vim-colors-solarized'
 Plug 'editorconfig/editorconfig-vim'
-Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
-Plug 'rust-lang/rust.vim'
+Plug 'rdnetto/ycm-generator', { 'branch': 'stable' }
 Plug 'scrooloose/syntastic'
 Plug 'tpope/vim-fugitive'
 
@@ -31,22 +38,26 @@ call plug#end()
 " ============================================================================
 
 set nocompatible       " has to be explicit to work for some reason
+set encoding=utf-8     " set file encodings to utf-8
 set hidden             " hides buffers instead of closing
 set number             " enable line numbers
 set undofile           " persistent undo
 set cursorline         " highlight current line
-set backspace=indent,eol,start
+set colorcolumn=80     " highlights column
 set foldlevelstart=10  " open most folds by default
 set tabstop=2          " tabs are displayed 2 spaces wide
 set shiftwidth=2       " reindent ops indent 2 columns
 set softtabstop=2      " tab key results in 2 spaces
 set expandtab          " tab inserts spaces instead of tabs
 set autoindent         " copy indent from previous line
+set autowrite          " save on buffer switch
+set autoread           " automatically reload file if changed externally
 set wildmenu           " visual autocomplete for command menu
 set lazyredraw         " redraw only when we need to
 set showmatch          " highlight matching parenthesis
 set hlsearch           " highlight search terms
 set incsearch          " show search matchs as you type
+set backspace=indent,eol,start
 
 " local directories
 set backupdir=~/.vim/backups
@@ -54,9 +65,9 @@ set directory=~/.vim/swaps
 set undodir=~/.vim/undo
 
 "colorscheme
-set t_Co=256
-set background=dark
 colorscheme solarized
+set background=dark
+set t_Co=256
 
 " }}}
 " ============================================================================
