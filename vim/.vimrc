@@ -21,6 +21,7 @@ Plug 'altercation/vim-colors-solarized'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'rdnetto/ycm-generator', { 'branch': 'stable' }
 Plug 'scrooloose/syntastic'
+Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-fugitive'
 
 function! BuildYCM(info)
@@ -58,6 +59,8 @@ set showmatch          " highlight matching parenthesis
 set hlsearch           " highlight search terms
 set incsearch          " show search matchs as you type
 set backspace=indent,eol,start
+
+filetype plugin indent on
 
 " local directories
 set backupdir=~/.vim/backups
@@ -116,6 +119,11 @@ inoreabbrev <expr> #!! "#!/usr/bin/env" . (empty(&filetype) ? '' : ' '.&filetype
 " ============================================================================
 " plugins {{{
 " ============================================================================
+
+" ----------------------------------------------------------------------------
+" polyglot
+" ----------------------------------------------------------------------------
+let g:polyglot_disabled = ['clojure', 'go', 'rust']
 
 " ----------------------------------------------------------------------------
 " syntastic.vim
