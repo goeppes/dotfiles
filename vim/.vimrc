@@ -58,6 +58,7 @@ set lazyredraw         " redraw only when we need to
 set showmatch          " highlight matching parenthesis
 set hlsearch           " highlight search terms
 set incsearch          " show search matchs as you type
+set belloff=all
 set backspace=indent,eol,start
 
 filetype plugin indent on
