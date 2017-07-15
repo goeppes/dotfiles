@@ -8,6 +8,7 @@ call plug#begin('~/.vim/plugged')
 " junegunn's plugins
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
+Plug 'junegunn/seoul256.vim'
 
 " languages
 Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
@@ -69,7 +70,7 @@ set directory=~/.vim/swaps
 set undodir=~/.vim/undo
 
 "colorscheme
-colorscheme solarized
+colo solarized
 set background=dark
 set t_Co=256
 
@@ -131,6 +132,8 @@ let g:polyglot_disabled = ['clojure', 'go', 'rust']
 " ----------------------------------------------------------------------------
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
+let g:syntastic_python_python_exec = 'python3'
+let g:syntastic_mode_map = {'mode': 'passive'}
 
 " }}}
 " ============================================================================

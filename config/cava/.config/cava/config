@@ -1,0 +1,12 @@
+## CAVA CONFIGURATION
+
+[general]
+mode = normal
+framerate = 60
+
+[input]
+method = fifo
+source = /tmp/mpd.fifo
+
+[color]
+gradient = 1
