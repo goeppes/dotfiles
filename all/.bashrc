@@ -36,11 +36,6 @@ PATH="$HOME/bin:$PATH"
 PATH="$HOME/.cargo/bin:$PATH"
 export PATH
 
-# python virtualenvwrapper
-export WORKON_HOME="~/.virtualenv"
-export VIRTUALENVWRAPPER_PYTHON="/usr/bin/python3"
-source "/usr/local/bin/virtualenvwrapper.sh"
-
 export LD_LIBRARY_PATH="/usr/local/cuda-8.0/lib64:$LD_LIBRARY_PATH"
 
 # enable programmable completion features (you don't need to enable
