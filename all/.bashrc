@@ -169,6 +169,16 @@ export PS2
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
+if [ -e ~/.fzf ]; then
+  PATH="$PATH:~/.fzf/bin"
+  source ~/.fzf/shell/key-bindings.bash
+  source ~/.fzf/shell/completion.bash
+fi
+
+export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow -g "![.git,node_modules]/*" 2> /dev/null'
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+bind -x '"\C-x": vim $(fzf);'
+
 [[ -s "/home/tyro/.gvm/scripts/gvm" ]] && source "/home/tyro/.gvm/scripts/gvm"
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
