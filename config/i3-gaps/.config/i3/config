@@ -163,10 +163,6 @@ hide_edge_borders both
 # disable titlebars so i3-gaps works
 for_window [class="^.*"] border pixel 0
 
-assign [class="Google-chrome"] 2
-assign [class="Nautilus"] 1
-assign [class="mpv"] 2
-
 # i3-gaps settings
 # More info visit: https://github.com/Airblader/i3
 
