@@ -26,18 +26,6 @@ export HISTCONTROL=ignoreboth
 export HISTSIZE=1000
 export HISTFILESIZE=2000
 
-export EDITOR="vim"
-export LANG="en_US.UTF-8"
-
-PATH="/usr/local/cuda-8.0/bin:$PATH"
-PATH="/usr/local/go/bin:$PATH"
-PATH="$HOME/anaconda/bin:$PATH"
-PATH="$HOME/bin:$PATH"
-PATH="$HOME/.cargo/bin:$PATH"
-export PATH
-
-export LD_LIBRARY_PATH="/usr/local/cuda-8.0/lib64:$LD_LIBRARY_PATH"
-
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
 # sources /etc/bash.bashrc).
