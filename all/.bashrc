@@ -51,7 +51,7 @@ if [ -x /usr/bin/dircolors ]; then
 fi
 
 # some more ls aliases
-alias ll='ls -alF --group-directories-first'
+alias ll='LC_COLLATE=C ls -alF --group-directories-first'
 alias la='ls -A'
 alias l='ls -CF'
 
