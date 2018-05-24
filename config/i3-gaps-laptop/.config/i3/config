@@ -11,8 +11,12 @@
 
 # startup processes
 exec --no-startup-id "~/.fehbg &"
-exec --no-startup-id pasystray
-exec --no-startup-id nm-applet
+exec --no-startup-id "nm-applet"
+exec --no-startup-id "fcitx"
+exec --no-startup-id "keepassxc"
+exec --no-startup-id "dropbox start"
+
+exec_always --no-startup-id "~/.config/polybar/launch.sh"
 
 # set Alt as modifier key
 set $mod Mod1
@@ -36,7 +40,8 @@ font tamzen:monospace 8
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+Return exec urxvtcd
+#bindsym $mod+Return exec i3-sensible-terminal
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -152,13 +157,6 @@ mode "$mode_resize" {
 }
 bindsym $mod+r mode "$mode_resize"
 
-# Start i3bar to display a workspace bar (plus the system information i3status
-# finds out, if available)
-bar {
-        status_command i3status
-        position top
-}
-
 hide_edge_borders both
 # disable titlebars so i3-gaps works
 for_window [class="^.*"] border pixel 0
@@ -166,5 +164,7 @@ for_window [class="^.*"] border pixel 0
 # i3-gaps settings
 # More info visit: https://github.com/Airblader/i3
 
-gaps inner 20
+smart_gaps on
+
+gaps inner 15
 gaps outer 0
