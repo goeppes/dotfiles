@@ -11,8 +11,9 @@
 
 # startup processes
 exec --no-startup-id "~/.fehbg &"
-exec --no-startup-id pasystray
-exec --no-startup-id nm-applet
+exec --no-startup-id "nm-applet"
+exec --no-startup-id "keepassxc"
+exec --no-startup-id "dropbox start"
 
 exec_always --no-startup-id "~/.config/polybar/launch.sh"
 
