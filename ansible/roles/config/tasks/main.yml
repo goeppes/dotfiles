@@ -1,0 +1,10 @@
+---
+- name: install packages
+  become: yes
+  become_method: sudo
+  package:
+    name: {{ item }}
+    state: present
+  with_items:
+    - git
+    - stow
