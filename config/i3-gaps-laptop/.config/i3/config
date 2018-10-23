@@ -15,6 +15,7 @@ exec --no-startup-id "nm-applet"
 exec --no-startup-id "fcitx"
 exec --no-startup-id "keepassxc"
 exec --no-startup-id "dropbox start"
+exec --no-startup-id "gnome-screensaver"
 
 exec_always --no-startup-id "~/.config/polybar/launch.sh"
 
@@ -40,7 +41,7 @@ font tamzen:monospace 8
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec urxvtcd
+bindsym $mod+Return exec i3-sensible-terminal
 #bindsym $mod+Return exec i3-sensible-terminal
 
 # kill focused window

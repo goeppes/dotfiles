@@ -2,6 +2,16 @@
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
 
+export EDITOR="vim"
+export LANG="en_US.UTF-8"
+
+PATH="/usr/local/cuda-8.0/bin:$PATH"
+PATH="/usr/local/go/bin:$PATH"
+PATH="$HOME/.local/bin:$PATH"
+PATH="$HOME/.cargo/bin:$PATH"
+PATH="$HOME/bin:$PATH"
+export PATH
+
 # If not running interactively, don't do anything
 [[ -z "$PS1" ]] && return
 
