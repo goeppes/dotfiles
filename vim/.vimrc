@@ -16,6 +16,7 @@ Plug 'guns/vim-clojure-static', { 'for': 'clojure' }
 Plug 'rust-lang/rust.vim', { 'for': 'rust' }
 Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
+Plug 'alx741/vim-stylishask', { 'for': 'haskell' }
 
 " git stuff
 Plug 'airblade/vim-gitgutter'
@@ -26,6 +27,7 @@ Plug 'altercation/vim-colors-solarized'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'rdnetto/ycm-generator', { 'branch': 'stable' }
 Plug 'w0rp/ale'
+Plug 'Shougo/vimproc.vim', { 'do': 'make' }
 
 function! BuildYCM(info)
   if a:info.status == 'installed' || a:info.force

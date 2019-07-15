@@ -8,10 +8,16 @@ export LANG="en_US.UTF-8"
 PATH="/usr/local/cuda-8.0/bin:$PATH"
 PATH="/usr/local/go/bin:$PATH"
 #PATH="$HOME/anaconda/bin:$PATH"
+PATH="$HOME/.jx/bin:$PATH"
 PATH="$HOME/.local/bin:$PATH"
 PATH="$HOME/.cargo/bin:$PATH"
+PATH="$HOME/.poetry/bin:$PATH"
+PATH="$HOME/.pyenv/bin:$PATH"
 PATH="$HOME/bin:$PATH"
 export PATH
+
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
 
 export LD_LIBRARY_PATH="/usr/local/cuda-8.0/lib64:$LD_LIBRARY_PATH"
 
@@ -71,6 +77,7 @@ alias l='ls -CF'
 alias cls="tput reset"
 alias winej="LANG='ja_JP.UTF8' wine"
 alias ssudo='sudo -E env "PATH=$PATH"'
+alias helmrun="helm tiller run -- helm"
 
 ################################################################################
 #
@@ -187,6 +194,11 @@ if [ -e ~/.fzf ]; then
   source ~/.fzf/shell/key-bindings.bash
   source ~/.fzf/shell/completion.bash
 fi
+
+source <(kubectl completion bash)
+source <(jx completion bash)
+
+complete -C '/home/tyro/.local/bin/aws_completer' aws
 
 export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow -g "![.git,node_modules]/*" 2> /dev/null'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"

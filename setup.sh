@@ -7,16 +7,18 @@ set -eu
 # if dual-booting windows, use local time
 timedatectl set-local-rtc 1
 
+sudo add-apt-repository ppa:nilarimogard/webupd8 # mcomix
+
 # development tools
 sudo apt install git vim neovim stow rxvt-unicode-256color python3-pip
+sudo apt install mcomix
 
 # fun stuff
 sudo apt install anki mpv ffmpeg ffmpeg-thumbnailer neofetch weechat \
   lftp mediainfo transmission-cli minidlna rofi mpd ncmpcpp torbrowser-launcher
 
 # extra stuff from snapcraft
-sudo snap install brave gimp intellij-idea-{community,ultimate} mcomix-tabetai
-sudo snap connect mcomix-tabetai:removable-media core:removable-media
+sudo snap install brave gimp intellij-idea-{community,ultimate}
 
 # fonts
 # - siji
