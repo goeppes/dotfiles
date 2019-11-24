@@ -202,6 +202,9 @@ fi
 source <(kubectl completion bash)
 source <(jx completion bash)
 
+# opam configuration
+test -r /home/tyro/.opam/opam-init/init.sh && . /home/tyro/.opam/opam-init/init.sh > /dev/null 2> /dev/null || true
+
 complete -C '/home/tyro/.local/bin/aws_completer' aws
 
 export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow -g "![.git,node_modules]/*" 2> /dev/null'
