@@ -18,7 +18,7 @@ exec --no-startup-id "dropbox start"
 exec_always --no-startup-id "~/.config/polybar/launch.sh"
 
 # set Alt as modifier key
-set $mod Mod1
+set $mod Mod4
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
