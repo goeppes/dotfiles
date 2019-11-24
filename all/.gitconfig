@@ -1,6 +1,7 @@
 [user]
 	name = Stephen Goeppele
 	email = s.goeppele.parrish@gmail.com
+	signingkey = 7E9E4B7C5091CB72
 [core]
 	autocrlf = input
 	editor = vim
@@ -15,3 +16,5 @@
 [merge]
 	summary = true
 
+[commit]
+	gpgsign = true
