@@ -76,6 +76,7 @@ alias ll='LC_COLLATE=C ls -alF --group-directories-first'
 alias la='ls -A'
 alias l='ls -CF'
 
+alias tree="tree --dirsfirst -a"
 alias cls="tput reset"
 alias winej="LANG='ja_JP.UTF8' wine"
 alias ssudo='sudo -E env "PATH=$PATH"'
