@@ -3,7 +3,6 @@
 	email = s.goeppele.parrish@gmail.com
 	signingkey = 7E9E4B7C5091CB72
 [core]
-	autocrlf = input
 	editor = vim
 [color]
 	diff = auto
@@ -18,3 +17,5 @@
 
 [commit]
 	gpgsign = true
+[diff "sopsdiffer"]
+	textconv = sops -d
