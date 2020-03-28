@@ -7,14 +7,14 @@ call plug#begin('~/.vim/plugged')
 " junegunn's plugins
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-Plug 'junegunn/seoul256.vim'
+"Plug 'junegunn/seoul256.vim'
 
 " languages
-Plug 'fatih/vim-go', { 'for': 'go', 'do': ':GoInstallBinaries' }
-Plug 'guns/vim-clojure-static', { 'for': 'clojure' }
-Plug 'rust-lang/rust.vim', { 'for': 'rust' }
-Plug 'sheerun/vim-polyglot'
-Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
+"Plug 'fatih/vim-go', { 'for': 'go', 'do': ':GoInstallBinaries' }
+"Plug 'guns/vim-clojure-static', { 'for': 'clojure' }
+"Plug 'rust-lang/rust.vim', { 'for': 'rust' }
+"Plug 'sheerun/vim-polyglot'
+"Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
 
 "Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
 "Plug 'neovimhaskell/haskell-vim', { 'for': 'haskell' }
@@ -28,17 +28,17 @@ Plug 'tpope/vim-fugitive'
 " editor
 Plug 'altercation/vim-colors-solarized'
 Plug 'editorconfig/editorconfig-vim'
-Plug 'rdnetto/ycm-generator', { 'branch': 'stable' }
+"Plug 'rdnetto/ycm-generator', { 'branch': 'stable' }
 Plug 'w0rp/ale'
 Plug 'Shougo/vimproc.vim', { 'do': 'make' }
-Plug 'tmux-plugins/vim-tmux-focus-events'
+"Plug 'tmux-plugins/vim-tmux-focus-events'
 
 function! BuildYCM(info)
   if a:info.status == 'installed' || a:info.force
     !./install.py --clang-completer --gocode-completer
   endif
 endfunction
-Plug 'valloric/youcompleteme', { 'for': ['c', 'cpp', 'go'], 'do': function('BuildYCM') }
+"Plug 'valloric/youcompleteme', { 'for': ['c', 'cpp', 'go'], 'do': function('BuildYCM') }
 
 call plug#end()
 
