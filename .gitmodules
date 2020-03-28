@@ -1,0 +1,6 @@
+[submodule "mpv-config"]
+	path = config/mpv/.config/mpv/classicjazz
+	url = https://github.com/classicjazz/mpv-config
+[submodule "config/mpv/.config/mpv/classicjazz"]
+	path = config/mpv/.config/mpv/classicjazz
+	url = https://github.com/classicjazz/mpv-config
