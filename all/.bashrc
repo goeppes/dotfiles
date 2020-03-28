@@ -9,7 +9,6 @@ PATH="/usr/local/cuda-8.0/bin:$PATH"
 PATH="/usr/local/go/bin:$PATH"
 #PATH="$HOME/anaconda/bin:$PATH"
 PATH="$(stack path --compiler-bin):$PATH"
-PATH="$HOME/.jx/bin:$PATH"
 PATH="$HOME/.local/bin:$PATH"
 PATH="$HOME/.cargo/bin:$PATH"
 PATH="$HOME/.poetry/bin:$PATH"
@@ -81,7 +80,7 @@ alias tree="tree --dirsfirst -a"
 alias cls="tput reset"
 alias winej="LANG='ja_JP.UTF8' wine"
 alias ssudo='sudo -E env "PATH=$PATH"'
-alias helmrun="helm tiller run -- helm"
+alias helmrun="helm2 tiller run -- helm2"
 
 ################################################################################
 #
@@ -127,63 +126,67 @@ prompt_git() {
   fi
 }
 
-if tput setaf 1 &> /dev/null; then
-  tput sgr0; # reset colors
-  bold=$(tput bold);
-  reset=$(tput sgr0);
-  # Solarized colors, taken from http://git.io/solarized-colors.
-  black=$(tput setaf 0);
-  blue=$(tput setaf 33);
-  cyan=$(tput setaf 37);
-  green=$(tput setaf 64);
-  orange=$(tput setaf 166);
-  purple=$(tput setaf 125);
-  red=$(tput setaf 124);
-  violet=$(tput setaf 61);
-  white=$(tput setaf 15);
-  yellow=$(tput setaf 136);
+if test -z "$EMACS"; then
+  if tput setaf 1 &> /dev/null; then
+    tput sgr0; # reset colors
+    bold=$(tput bold);
+    reset=$(tput sgr0);
+    # Solarized colors, taken from http://git.io/solarized-colors.
+    black=$(tput setaf 0);
+    blue=$(tput setaf 33);
+    cyan=$(tput setaf 37);
+    green=$(tput setaf 64);
+    orange=$(tput setaf 166);
+    purple=$(tput setaf 125);
+    red=$(tput setaf 124);
+    violet=$(tput setaf 61);
+    white=$(tput setaf 15);
+    yellow=$(tput setaf 136);
+  else
+    bold='';
+    reset="\e[0m";
+    black="\e[1;30m";
+    blue="\e[1;34m";
+    cyan="\e[1;36m";
+    green="\e[1;32m";
+    orange="\e[1;33m";
+    purple="\e[1;35m";
+    red="\e[1;31m";
+    violet="\e[1;35m";
+    white="\e[1;37m";
+    yellow="\e[1;33m";
+  fi;
+
+  # Highlight the user name when logged in as root.
+  if [[ "${USER}" == "root" ]]; then
+    userStyle="${red}";
+  else
+    userStyle="${orange}";
+  fi;
+
+  # Highlight the hostname when connected via SSH.
+  if [[ "${SSH_TTY}" ]]; then
+    hostStyle="${bold}${red}";
+  else
+    hostStyle="${yellow}";
+  fi;
+
+  PS1="\[\033]0;\W\007\]"
+  PS1+="\[${userStyle}\]\u" # username
+  PS1+="\[${white}\]@"
+  PS1+="\[${hostStyle}\]\h" # host
+  PS1+="\[${white}\]:"
+  PS1+="\[${green}\]\w" # working directory
+  PS1+="\$(prompt_git \"\[${white}\] on \[${violet}\]\" \"\[${blue}\]\")"
+  PS1+="\n"
+  PS1+="\[${white}\]\$ \[${reset}\]"
+  export PS1
+
+  PS2="\[${yellow}\]> \[${reset}\]"
+  export PS2
 else
-  bold='';
-  reset="\e[0m";
-  black="\e[1;30m";
-  blue="\e[1;34m";
-  cyan="\e[1;36m";
-  green="\e[1;32m";
-  orange="\e[1;33m";
-  purple="\e[1;35m";
-  red="\e[1;31m";
-  violet="\e[1;35m";
-  white="\e[1;37m";
-  yellow="\e[1;33m";
-fi;
-
-# Highlight the user name when logged in as root.
-if [[ "${USER}" == "root" ]]; then
-  userStyle="${red}";
-else
-  userStyle="${orange}";
-fi;
-
-# Highlight the hostname when connected via SSH.
-if [[ "${SSH_TTY}" ]]; then
-  hostStyle="${bold}${red}";
-else
-  hostStyle="${yellow}";
-fi;
-
-PS1="\[\033]0;\W\007\]"
-PS1+="\[${userStyle}\]\u" # username
-PS1+="\[${white}\]@"
-PS1+="\[${hostStyle}\]\h" # host
-PS1+="\[${white}\]:"
-PS1+="\[${green}\]\w" # working directory
-PS1+="\$(prompt_git \"\[${white}\] on \[${violet}\]\" \"\[${blue}\]\")"
-PS1+="\n"
-PS1+="\[${white}\]\$ \[${reset}\]"
-export PS1
-
-PS2="\[${yellow}\]> \[${reset}\]"
-export PS2
+  export PS1="\u@\h:\w\$(prompt_git \" on \" \"\")\n\$ "
+fi
 
 ################################################################################
 #
@@ -200,7 +203,6 @@ if [ -e ~/.fzf ]; then
 fi
 
 source <(kubectl completion bash)
-source <(jx completion bash)
 
 # opam configuration
 test -r /home/tyro/.opam/opam-init/init.sh && . /home/tyro/.opam/opam-init/init.sh > /dev/null 2> /dev/null || true
