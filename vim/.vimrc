@@ -26,7 +26,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
 
 " editor
-Plug 'altercation/vim-colors-solarized'
+"Plug 'altercation/vim-colors-solarized'
 Plug 'editorconfig/editorconfig-vim'
 "Plug 'rdnetto/ycm-generator', { 'branch': 'stable' }
 Plug 'w0rp/ale'
@@ -84,8 +84,8 @@ set directory=~/.vim/swaps
 set undodir=~/.vim/undo
 
 "colorscheme
-set background=dark
-colorscheme solarized
+"set background=dark
+"colorscheme solarized
 
 " }}}
 " ============================================================================
